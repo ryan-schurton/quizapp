@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- CSS (load bootstrap) -->
+   <!-- <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
+
+    <!-- Bootstrap Core CSS -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Timeline CSS -->
+    <link href="dist/css/timeline.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="bower_components/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <style>
+        .navbar { border-radius:0; }
+    </style>
+
+    <!-- JS (load angular, ui-router, and our custom js file) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+
+    <script src="app.js"></script>
+    <script type="text/javascript" src="javascript/controller/basicinfo.ctrl.js"></script>
+    <script type="text/javascript" src="javascript/controller/prerequisites.ctrl.js"></script>
+    <script type="text/javascript" src="javascript/controller/questions.ctrl.js"></script>
+    <script type="text/javascript" src="javascript/controller/submit.ctrl.js"></script>
+    <script type="text/javascript" src="javascript/controller/quizzes.ctrl.js"></script>
+    <script type="text/javascript" src="javascript/controller/quiz.ctrl.js"></script>
+    <script type="text/javascript" src="javascript/service/quiz.srv.js"></script>
+
+</head>
+
+<!-- apply our angular app to our site -->
+<body ng-app="routerApp">
+
+<!-- NAVIGATION -->
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" ui-sref="#">JustLearnt</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li><a ui-sref="quizzes">Home</a></li>
+        <li><a ui-sref="home">Quiz Creator</a></li>
+<!--         <li><a ui-sref="contact">Contact</a></li>
+ -->    </ul>
+</nav>
+
+<!-- MAIN CONTENT -->
+<!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
+<div class="container">
+    <div ui-view></div>
+</div>
+
+<!-- <div class="text-center">
+    <p>A tutorial by <a href="http://scotch.io" target="_blank">scotch.io</a></p>
+    <p>View the tutorial: <a href="http://scotch.io/tutorials/javascript/angular-routing-using-ui-router" target="_blank">AngularJS Routing using UI-Router</a></p>
+</div>
+ -->
+    <!-- jQuery -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+<!--     // <script src="../bower_components/raphael/raphael-min.js"></script>
+    // <script src="../bower_components/morrisjs/morris.min.js"></script>
+    // <script src="../js/morris-data.js"></script> -->
+
+    <!-- Custom Theme JavaScript -->
+    <script src="dist/js/sb-admin-2.js"></script>
+
+</body>
+</html>

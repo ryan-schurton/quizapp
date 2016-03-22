@@ -1,0 +1,26 @@
+
+<div class="row">
+
+<div class="col-sm-6 col-md-4" ng-repeat="model in testObj">
+
+<div>
+
+  <div class="panel panel-info" >
+  
+<div class="panel-heading">{{model.name}}</div>
+  <div class="panel-body">
+    			  
+            <p>{{model.descrip}}</p>
+
+    		<p><a ui-sref="quiz({ id: model.id})" class="btn btn-primary" role="button">Take Quiz</a></p>
+
+
+    </div> 
+  </div>
+
+
+</div>
+</div>
+</div>
+
+			  
