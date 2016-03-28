@@ -8,8 +8,8 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
 
         
         // HOME STATES AND NESTED VIEWS ========================================
-        .state('home', {
-            url: '/home',
+        .state('quizzes', {
+            url: '/quizzes',
             templateUrl: 'partials/basicinfo.html',
             controller: 'basicCtrl as ctrl'
         })
@@ -33,8 +33,8 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             controller: 'submitCtrl as ctrl'
         })
 
-        .state('quizzes', {
-            url: '/quizzes',
+        .state('home', {
+            url: '/home',
             templateUrl: 'partials/quizindex.html',
             controller: 'quizzesCtrl as ctrl'
         })
