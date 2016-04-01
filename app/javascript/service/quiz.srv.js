@@ -40,8 +40,18 @@
 		this.completeQuiz.prerequisites = this.prereqObj;
 		this.completeQuiz.questions = this.Quiz.quiz
 
+		var stringObj = JSON.stringify(this.completeQuiz);
+		
+		$http.post('/submit', stringObj).then(function(response){
+			console.log("Success");
+			console.log(response);
+		}, function(response){
+			console.log("Fail");
+			console.log(response);
+		});
 
 	}
+
 	this.theQuiz;
 
 	this.getQuiz = function(name){

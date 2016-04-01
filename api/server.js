@@ -23,7 +23,7 @@ var quiz = require('./controllers/quiz.ctrl.js');
 
 app.use('/', express.static('./app'));
 
-app.get('/quizzes', quiz.findAll);
+app.get('/home', quiz.findAll);
 app.post('/submit', quiz.add);
 app.get('/quiz/:id', quiz.findById);
 

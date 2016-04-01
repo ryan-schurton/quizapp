@@ -36,17 +36,24 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
         .state('home', {
             url: '/home',
             templateUrl: 'partials/quizindex.html',
-            controller: 'quizzesCtrl as ctrl'
+            controller: 'quizzesCtrl as ctrl',
+            resolve: {
+
+                simpleObj: function(quizRoutes){
+
+                    return quizRoutes.getQuizzes();
+                }
+            }
         })
         .state('quiz', {
             url: '/quiz/:id',
             templateUrl: 'partials/quiz.html',
-            controller: 'quizCtrl',
+            controller: 'quizCtrl as ctrl',
             resolve: {
 
-                simpleObj: function(QuizService, $stateParams){
+                simpleObj: function(quizRoutes, $stateParams){
 
-                    return QuizService.getQuiz($stateParams.id);
+                    return quizRoutes.getQuiz($stateParams.id);
                 }
             }
     })

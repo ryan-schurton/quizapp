@@ -15,11 +15,13 @@ exports.findAll = function(req, res) {
 	quizapp.find({}, function(err, results){
 		return res.send(results);
 	});
+  console.log("all found");
 };
 
 //Get one quiz
 exports.findById = function(req, res){
-	//console.log(req.params.id);
+  console.log("hello")
+	console.log(req.params.id);
   var id = req.params.id;
   quizapp.findOne({'_id':id},function(err, result) {
     return res.send(result);

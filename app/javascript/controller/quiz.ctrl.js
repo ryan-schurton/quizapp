@@ -1,126 +1,157 @@
-routerApp.controller('quizCtrl', function($scope, $http, QuizService) {
+routerApp.controller('quizCtrl', function($scope, simpleObj, QuizService, quizRoutes, $location) {
 
-    $scope.quizID = QuizService.theQuiz;
+    // if(!simpleObj.data){
+    //     $location.path("/home");
+    // } else {
+    // }
+
+    //var curquizObj = JSON.parse(simpleObj.data.name);
+    //console.log(curquizObj);
+        //Move out of the controller and into quiz.route.srv.js
+    	//$scope.question;
+        //this.curquizObj = 0;
+
+        this.curquizObj = JSON.parse(simpleObj.data.name);
+        this.atindex = 0;
+        this.userAnswers = [];
+
+        // this.crt_qest = 2;
+        
+       // this.correctAnswer = this.curquizObj.questions[0].correctAnswer;
+        //console.log(this.curquizObj.questions[0].correctAnswer);
+        //console.log("the correct answer is : " + this.correctAnswer);
+
+        /********************** Start of add new question *****************************/
+        this.displayCurrentQuestion = function(quesIndex) {
+            this.crt_qest = this.userAnswers[quesIndex];
+            //This is the quiz object returned from the resolve
+            //it contains basicInfo , prerequisites, and questions
+        	//this.curquizObj = JSON.parse(simpleObj.data.name);
+
+            //Display the very first object
+            //this.question;
+            //Store the correct answer to be tested
+            this.correctAnswer = this.curquizObj.questions[quesIndex].correctAnswer;
+
+            //get a question from curquizObj to display in the partial quiz.html
+            this.question = this.curquizObj.questions[quesIndex].question;
+
+            //this is an empty array that will hold all the question options
+            this.currentQuestion = [];
+
+            //This loop will add the current selected question to currentQuestion array to display to end user
+            for(var i = 0; i < this.curquizObj.questions[quesIndex].answers.length; i++) {
+                this.currentQuestion.push({"answer" : this.curquizObj.questions[quesIndex].answers[i], "value" : i + 1});
+            }
+        }
+        /********************** End of add new question *****************************/
 
 
-    var curquizObj;
-    $scope.atindex = 0;
 
-    $scope.userAnswers = [];
-    $scope.quizAnswers = [];
-
-
-    console.log($scope.quizAnswers.length);
-
-    $http.get("/quiz/" + $scope.quizID).then(function(response) {
-    	$scope.question
-    	curquizObj = JSON.parse(response.data.name);
-
-    	$scope.question = curquizObj.questions[0].question;
-
-    	$scope.answer1 = curquizObj.questions[0].answers[0];
-    	$scope.answer2 = curquizObj.questions[0].answers[1];
-    	$scope.answer3 = curquizObj.questions[0].answers[2];
-    	$scope.answer4 = curquizObj.questions[0].answers[3];
-
-
+        /********************** Start of Showing question button selector *****************************/
     	//This will create clickable links to change the current question value
-	    $scope.cols = curquizObj.questions.length;
-		$scope.arr = [];
+	    this.cols = this.curquizObj.questions.length;
+		this.arr = [];
 
-	    $scope.arr.length = 0;
-	    for (var i = 0; i < parseInt($scope.cols) ; i++) {
-	        $scope.arr.push(i);
+	    this.arr.length = 0;
+	    for (var i = 0; i < parseInt(this.cols) ; i++) {
+	        this.arr.push(i);
 	    }
 
-        $scope.endAt = curquizObj.questions.length - 1;
-        console.log($scope.endAt);
+        this.endAt = this.curquizObj.questions.length - 1;
+        /********************** End of Showing question button selector *****************************/
+        
+        this.addAnswer = function(answer) {
+            console.log("My Answer is : " + answer);
+            //console.log("Correct Answer : " + );
+            //console.log('save');
+            console.log("inside chageQes: " + this.crt_qest);
+            console.log("Currently at question: " + this.atindex);
+            this.userAnswers[this.atindex] = this.crt_qest; //assign Answer to index
+            //console.log(this.userAnswers);
+            //console.log($scope.atindex);
+        }
 
-    });
+        //console.log(this.endAt);
 
-    $scope.addAnswer = function() {
-    	console.log("inside chageQes: " + $scope.crt_qest);
-    	$scope.userAnswers[$scope.atindex] = $scope.crt_qest;
-    	console.log($scope.userAnswers);
-    }
+        //Will change the question base on the direction clicked
+        this.next = function(direction) {
+            console.log("abc");
+            if(direction) {
+                this.atindex++;
+            } else {
+                this.atindex--;
+            }
 
-    $scope.next = function(direction) {
+            this.changeQes(this.atindex);
+            this.itemClicked(this.atindex);
+        }
+    
 
-    	
-    	if(direction) {
-    		$scope.atindex++;
-    	} else {
-			$scope.atindex--;
-    	}
+    this.changeQes = function(index, arr, $event) {
 
-		$scope.changeQes($scope.atindex);
-        $scope.itemClicked($scope.atindex);
-	}
-
-
-
-    $scope.changeQes = function(index, arr, $event) {
-
-    	//console.log(index);
-    	if($scope.atindex == curquizObj.questions.length) {
+        this.atindex = index;
+    	if(this.atindex == this.curquizObj.questions.length) {
     		index = 0;
     	} 
 
-    	if($scope.atindex == -1) {
-    		index = curquizObj.questions.length - 1;
+    	if(this.atindex == -1) {
+    		index = this.curquizObj.questions.length - 1;
     	} 
 
+        //call function to change question
+        //this.displayCurrentQuestion(index);
 
-    	$scope.question = curquizObj.questions[index].question;
+    	this.cols = this.curquizObj.questions.length;
+		this.arr = [];
 
-    	$scope.answer1 = curquizObj.questions[index].answers[0];
-    	$scope.answer2 = curquizObj.questions[index].answers[1];
-    	$scope.answer3 = curquizObj.questions[index].answers[2];
-    	$scope.answer4 = curquizObj.questions[index].answers[3];
+	    this.arr.length = 0;
+	    for (var i = 0; i < parseInt(this.cols) ; i++) {
 
-    	$scope.crt_qest = $scope.userAnswers[index];
-
-    	$scope.cols = curquizObj.questions.length;
-		$scope.arr = [];
-
-	    $scope.arr.length = 0;
-	    for (var i = 0; i < parseInt($scope.cols) ; i++) {
-
-	        $scope.arr.push(i);
+	        this.arr.push(i);
 	    }
-
-	    $scope.atindex = index;
+        
+	    this.atindex = index;
 
 
 	}
 
-    $scope.itemClicked = function ($index) {
-        console.log($index);
-        $scope.selectedIndex = $index;
+    this.itemClicked = function($index) {
+
+        this.selectedIndex = $index;
+        this.displayCurrentQuestion($index); // call function to change the displayed question
+
+
     }
+    //TODO check what question the user is one ex: 0, 1, 2 ,3 
+
+    //TODO Check in userAnswer array if user has answered this question before
+
+    //TODO if there is an answer at this INDEX select the matching radio button value
+
+    //TODO if not insure no radio buttons are selected
+
+/**/
+
+	this.markQuiz = function() {
+
+		this.right=0;
+		this.wrong=0;
+        this.percentage = 0;
 
 
-
-	$scope.markQuiz = function() {
-
-		$scope.right=0;
-		$scope.wrong=0;
-        $scope.percentage = 0;
-
-
-		for(var i = 0; i < curquizObj.questions.length; i++) {
-			if($scope.userAnswers[i] === curquizObj.questions[i].correctAnswer) {
+		for(var i = 0; i < this.curquizObj.questions.length; i++) {
+            //console.log(this.curquizObj.questions[i].correctAnswer + " === " + this.userAnswers[i]);
+			if(this.curquizObj.questions[i].correctAnswer === this.userAnswers[i]) {
 				console.log("Correct");
-				$scope.right++;
+				this.right++;
 			} else {
-				$scope.wrong++;
+				this.wrong++;
 				console.log("Wrong");
 			}
 		}
 
-
-        $scope.percentage = (($scope.right  / curquizObj.questions.length) * 100).toFixed(2);
-
+        this.percentage = ((this.right  / this.curquizObj.questions.length) * 100).toFixed(2);
 
 	}
 

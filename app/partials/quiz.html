@@ -7,80 +7,63 @@
   .margin-top-30 { margin-top: 3.0em; }
 </style>
 
-<h2>{{question}}</h2>
+<h2>{{ctrl.question}}</h2>
 
-<form ng-init="itemClicked(0)">
+<form ng-init="ctrl.itemClicked(0)">
 
 <nav>
 	<ul class="pagination pagination-lg">
-	    <li class="page-item " ng-class="{ 'active': $index == selectedIndex }" ng-repeat="i in arr" ng-click="itemClicked($index)"><a ng-click="changeQes(i, arr, $event)" id="{{i+1}}" class="page-link" >{{i + 1}}</a></li>
+	    <li class="page-item " ng-class="{ 'active': $index == selectedIndex }" ng-repeat="i in ctrl.arr" ng-click="ctrl.itemClicked($index)"><a ng-click="ctrl.changeQes(i, ctrl.arr, $event)" id="{{i+1}}" class="page-link" >{{i + 1}}</a></li>
 	</ul>
 </nav>
 
   <div class="row col-lg-12 margin-top-05">
       <div class="btn-group">
-          <button type="button" class="btn btn-primary" ng-click="next(0)"><i class="fa fa-arrow-left fa-fw"></i>Previous</button>
-          <button type="button" class="btn btn-primary" ng-click="next(1)">Next<i class="fa fa-arrow-right fa-fw"></i></button>
+          <button type="button" class="btn btn-primary" ng-click="ctrl.next(0)"><i class="fa fa-arrow-left fa-fw"></i>Previous</button>
+          <button type="button" class="btn btn-primary" ng-click="ctrl.next(1)">Next<i class="fa fa-arrow-right fa-fw"></i></button>
       </div>
   </div>
 
+<!-- <div class="col-lg-10 margin-top-15">
+    <div class="input-group input-group-lg margin-top-15" ng-repeat="i in ctrl.currentQuestion">
+      <span class="input-group-addon">
+        <input type="radio" aria-label="..." name="answer" ng-model="ctrl.crt_qest" value="i.value" ng-click="ctrl.addAnswer()">
+      </span>
+      <input type="text" class="form-control" aria-label="..." ng-model="i.answer"  readonly>
+    </div>  
+</div> -->
+
 <div class="col-lg-10 margin-top-15">
-
-    <div class="input-group input-group-lg">
+    <div class="input-group input-group-lg margin-top-15" ng-repeat="i in ctrl.currentQuestion">
       <span class="input-group-addon">
-        <input type="radio" aria-label="..." name="answer" ng-model="crt_qest" value="1" ng-click="addAnswer()">
+        <input type="radio" aria-label="..." name="answer" ng-model="ctrl.crt_qest" value="{{i.value}}" ng-click="ctrl.addAnswer($index)">
       </span>
-      <input type="text" class="form-control" aria-label="..." ng-model="answer1"  readonly>
-    </div><!-- /input-group -->
+      <input type="text" class="form-control" aria-label="..." ng-model="i.answer"  readonly>
+    </div>  
+</div>
 
-
-    <div class="input-group input-group-lg margin-top-15">
-      <span class="input-group-addon">
-        <input type="radio" aria-label="..." name="answer" ng-model="crt_qest" value="2" ng-click="addAnswer()">
-      </span>
-      <input type="text" class="form-control" aria-label="..." ng-model="answer2"  readonly>
-    </div><!-- /input-group -->
-
-
-    <div class="input-group input-group-lg margin-top-15">
-      <span class="input-group-addon">
-        <input type="radio" aria-label="..." name="answer" ng-model="crt_qest" value="3" ng-click="addAnswer()">
-      </span>
-      <input type="text" class="form-control" aria-label="..." ng-model="answer3"  readonly>
-    </div><!-- /input-group -->
-
-
-    <div class="input-group input-group-lg margin-top-15">
-      <span class="input-group-addon">
-        <input type="radio" aria-label="..." name="answer" ng-model="crt_qest" value="4" ng-click="addAnswer()">
-      </span>
-      <input type="text" class="form-control" aria-label="..." ng-model="answer4"  readonly>
-    </div><!-- /input-group -->
-  
-  </div><!-- /.col-lg-6 -->
 
   
-  <div class=" row col-lg-12 margin-top-15">
-    <button type="button" class="btn btn-outline btn-success btn-lg " ng-click="markQuiz()" data-toggle="modal" data-target="#myModal" ng-show="atindex === ({endAt})">Submit</button>
-  </div>
+<div class=" row col-lg-12 margin-top-15">
+    <button type="button" class="btn btn-outline btn-success btn-lg " ng-click="ctrl.markQuiz()" data-toggle="modal" data-target="#myModal" >Submit</button>
+</div>
 
-</form>
+</form> 
 
 
-<!-- Modal -->
+
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
-    <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Your Results</h4>
       </div>
       <div class="modal-body">
-        <h4>Right: {{right}}</h4>
-        <h4>Wrong: {{wrong}}</h4>
-        <h4>Percentage: {{percentage}}</h4>
+        <h4>Right: {{ctrl.right}}</h4>
+        <h4>Wrong: {{ctrl.wrong}}</h4>
+        <h4>Percentage: {{ctrl.percentage}}</h4>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -1,4 +1,4 @@
-routerApp.controller('basicCtrl', function($http, QuizService){
+routerApp.controller('basicCtrl', function(QuizService){
 
 	this.title = QuizService.basicInfo_Obj.title;
 	this.description = QuizService.basicInfo_Obj.description;
