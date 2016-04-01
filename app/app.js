@@ -56,5 +56,10 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
                     return quizRoutes.getQuiz($stateParams.id);
                 }
             }
-    })
+        })
+        .state('register', {
+            url: '/register',
+            templateUrl: 'partials/register.html',
+            controller: 'registerCtrl as ctrl'
+        })
 });

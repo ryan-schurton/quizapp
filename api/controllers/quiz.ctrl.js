@@ -15,7 +15,7 @@ exports.findAll = function(req, res) {
 	quizapp.find({}, function(err, results){
 		return res.send(results);
 	});
-  console.log("all found");
+  //console.log("all found");
 };
 
 //Get one quiz
@@ -27,3 +27,7 @@ exports.findById = function(req, res){
     return res.send(result);
   });
 };
+
+exports.createUser = function(req, res){
+  console.log("created user");
+}

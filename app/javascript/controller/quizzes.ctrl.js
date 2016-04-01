@@ -1,5 +1,6 @@
 routerApp.controller('quizzesCtrl', function(QuizService, quizRoutes, simpleObj){
 
+
 	console.log(simpleObj.data);
 	this.testObj = [];
 

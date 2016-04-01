@@ -26,6 +26,7 @@ app.use('/', express.static('./app'));
 app.get('/home', quiz.findAll);
 app.post('/submit', quiz.add);
 app.get('/quiz/:id', quiz.findById);
+app.post('/register', quiz.createUser);
 
 var port = Number(process.env.PORT || 8000);
 

@@ -1,0 +1,68 @@
+<!--
+<label for="username">Username</label>
+<div class="input-group input-group-lg">
+  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"  placeholder="Username">
+</div>
+
+<label for="email-address">Email</label>
+<div class="input-group input-group-lg">
+  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"  placeholder="Email">
+</div>
+
+<label for="password">Password</label>
+<div class="input-group input-group-lg">
+  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"  placeholder="Password">
+</div>
+
+<label for="confirm-password">Confirm Password</label>
+<div class="input-group input-group-lg">
+  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"  placeholder="Confirm Password">
+</div> 
+-->
+
+<form role="form" ng-submit="ctrl.register()">
+	<div class = "panel panel-primary">
+
+	<div class = "panel-heading">
+      <h3 class = "panel-title">Sign Up For JustLearnt</h3>
+   </div>
+   <div class = "panel-body">
+	<div class="form-group">
+    	<label for="user">Username:</label>
+    	<input type="text" class="form-control input-lg" id="user" placeholder="Username" ng-model="ctrl.user">
+    </div>
+
+	<div class="form-group">
+    	<label for="email">Email:</label>
+    	<input type="email" class="form-control input-lg" id="email" placeholder="Email" ng-model="ctrl.email">
+  	</div>
+
+  	<div class="form-group">
+    	<label for="pwd">Password:</label>
+    	<input type="password" class="form-control input-lg" id="password" placeholder="Password" ng-model="ctrl.pwdwrd">
+  	</div>
+
+  	<div class="form-group">
+    	<label for="pwd">Confirm Password:</label>
+    	<input type="password" class="form-control input-lg" id="confirmpassowrd" placeholder="Confirm Password">
+  	</div>
+
+  	<hr>
+
+  	<button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+
+  </div>
+<!-- 	<button type="button" class="btn btn-primary btn-md">Sign Up</button>
+
+ --></div>
+</form>
+
+<!--  <div class = "panel panel-primary">
+   <div class = "panel-heading">
+      <h3 class = "panel-title">Panel title</h3>
+   </div>
+   
+   <div class = "panel-body">
+      This is a Basic panel
+   </div>
+</div> -->
