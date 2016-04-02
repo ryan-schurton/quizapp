@@ -21,12 +21,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 require('./models/quiz.mold.js');
 var quiz = require('./controllers/quiz.ctrl.js');
 
+require('./models/users.model.js');
+var usermodelctrl = require('./controllers/users.ctrl.js');
+
 app.use('/', express.static('./app'));
 
 app.get('/home', quiz.findAll);
 app.post('/submit', quiz.add);
 app.get('/quiz/:id', quiz.findById);
-app.post('/register', quiz.createUser);
+app.post('/register', usermodelctrl.createUser);
+app.post('/login', usermodelctrl.loginUser);
 
 var port = Number(process.env.PORT || 8000);
 

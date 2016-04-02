@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var quizapp = mongoose.model('quiz');
 
-//Add a quiz
+//Add a quiz object
 exports.add = function(req, res) {
 	var quizAsString = JSON.stringify(req.body); 
   	quizapp.create({"name" : quizAsString}, function (err, result) {

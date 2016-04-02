@@ -62,4 +62,9 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'partials/register.html',
             controller: 'registerCtrl as ctrl'
         })
+        .state('login', {
+            url: '/login',
+            templateUrl: 'partials/login.html',
+            controller: 'loginCtrl as ctrl'
+        })
 });

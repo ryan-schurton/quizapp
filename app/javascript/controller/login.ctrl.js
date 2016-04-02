@@ -1,4 +1,4 @@
-routerApp.controller('registerCtrl', function(Userservice){
+routerApp.controller('loginCtrl', function(Userservice){
 
 	//this.name = "ryan";
 
@@ -20,8 +20,8 @@ routerApp.controller('registerCtrl', function(Userservice){
 
 	// }
 
-	this.register = function(){
-		Userservice.createUser(this.user, this.email ,this.pwdwrd);
+	this.loginUser = function(){
+		Userservice.loginUser(this.user, this.pwdwrd);
 		// console.log(this.user);
 		// console.log(this.email);
 		// console.log(this.pwdwrd);
