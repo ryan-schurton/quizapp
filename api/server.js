@@ -2,6 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var app = express();
+var expressJwt = require('express-jwt');
+var jwt = require('jsonwebtoken');
 var mongoconnect = "mongodb://localhost/justlearnt";
 mongoose.connect(mongoconnect);
 

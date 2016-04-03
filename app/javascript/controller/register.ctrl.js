@@ -1,31 +1,25 @@
-routerApp.controller('registerCtrl', function(Userservice){
-
-	//this.name = "ryan";
-
-	//username
-	//this.user;
-	//email
-	//this.email;
-	//password
-	//this.pwdwrd;
-	//password confirm
+routerApp.controller('registerCtrl', function(Userservice, $window, $location){
 
 
+	//Userservice.getToken();
 
-	// this.title = QuizService.basicInfo_Obj.title;
-	// this.description = QuizService.basicInfo_Obj.description;
-	
-	// this.basicinfo = function() {
-	// 	QuizService.createBasicInfo(this.title, this.description);
+	//var isLoggedIn = function() {
+	  // var token = Userservice.getToken();
+	  // var payload;
 
-	// }
+	  // if(token){
+	  //   payload = token.split('.')[1];
+	  //   payload = $window.atob(payload);
+	  //   payload = JSON.parse(payload);
+	  //   console.log(payload);
 
-	this.register = function(){
+	  // } else {
+	  //   console.log("no token");
+	  // }
+	//};
+
+	this.register = function() {
 		Userservice.createUser(this.user, this.email ,this.pwdwrd);
-		// console.log(this.user);
-		// console.log(this.email);
-		// console.log(this.pwdwrd);
-		//send data to $http service
-		//console.log("user created");
+		//$location.path('/quizzes');
 	}
 });

@@ -11,7 +11,6 @@ routerApp.controller('loginCtrl', function(Userservice){
 	//password confirm
 
 
-
 	// this.title = QuizService.basicInfo_Obj.title;
 	// this.description = QuizService.basicInfo_Obj.description;
 	
@@ -22,6 +21,7 @@ routerApp.controller('loginCtrl', function(Userservice){
 
 	this.loginUser = function(){
 		Userservice.loginUser(this.user, this.pwdwrd);
+		console.log(Userservice.getToken());
 		// console.log(this.user);
 		// console.log(this.email);
 		// console.log(this.pwdwrd);
