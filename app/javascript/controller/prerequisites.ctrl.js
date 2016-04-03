@@ -1,5 +1,10 @@
+routerApp.controller('prereqCtrl', function(QuizService, Userservice, $location){
 
-routerApp.controller('prereqCtrl', function(QuizService){
+
+	if(!Userservice.getToken()) {
+		$location.path('/home');
+	} 
+
 	this.prereq = QuizService.prereqObj.prereq;
 
 

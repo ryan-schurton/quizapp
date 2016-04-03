@@ -1,4 +1,9 @@
-routerApp.controller('quesCtrl', function(QuizService){
+routerApp.controller('quesCtrl', function(QuizService, Userservice, $location){
+
+
+	if(!Userservice.getToken()) {
+		$location.path('/home');
+	} 
 
 
  		this.cols = QuizService.Quiz.quiz.length;

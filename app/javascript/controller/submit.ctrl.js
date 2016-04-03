@@ -1,4 +1,9 @@
-routerApp.controller('submitCtrl', function(QuizService){
+routerApp.controller('submitCtrl', function(QuizService, Userservice, $location){
+
+
+	if(!Userservice.getToken()) {
+		$location.path('/home');
+	} 
 
 
 	this.buildQuestion = function() {
