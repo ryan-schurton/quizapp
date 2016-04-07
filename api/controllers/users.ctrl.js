@@ -20,33 +20,47 @@ exports.createUser = function(req, res) {
 				  salt: user.salt
 				}, function (err) {
 	  	if (err) { 
-	  		console.log("some shit went wrong");
-	  		//res.json({errcode: err.code, errmess: err.message});
+	  		//console.log("some shit went wrong");
+	  		res.json({errcode: err.code, errmess: 'some shit went wrong'});
 	  	} else {
-	  		console.log(req.body);
-	  	// 	var token = jwt.sign(profile, "top", { expiresInMinutes: 60*5 });
- 			// res.json({token: token});
+	  		var profile = { user: req.body.user, email: req.body.email };
+			var token = jwt.sign(profile, "top", { expiresInMinutes: 60*5 });
+ 			res.json({token: token});
+
 	  	}
-	  	//console.log(err);
 	});
 }
 
 exports.loginUser = function(req, res) {
-	console.log(req.body);
-	User.findOne({ 'user': req.body.user }, function (err, User) {
- 		if (err) return handleError(err);
+	//console.log(req.body);
 
- 		//console.log(req.body.pwd);
+	User.findOne({ user: req.body.user }, function (err, userdata) {
+		if (err) {
+			res.json({message: "Something went wrong please try again"});
+		}
+		if (!userdata) {
+			res.json({message: "login credentials did not match, please try again"});
+		}
+		//console.log(userdata);
 
- 		var profile = {
- 			user: req.body.user,
- 			email: req.body.email,
- 		}
+		if(user.validPassword(req.body.pwd, userdata.salt, userdata.password)){
+			var profile = { user: req.body.user, email: req.body.email };
+			var token = jwt.sign(profile, "top", { expiresInMinutes: 60*5 });
+ 			res.json({token: token});
+ 			//console.log(token);
+		} else {
+			res.json({message: "login credentials did not match, please try again"});
+		}
+ 		// var profile = {
+ 		// 	user: req.body.user,
+ 		// 	email: req.body.email,
+ 		// }
 
- 		user.validPassword(req.body.pwd, User.salt);
- 		var token = jwt.sign(profile, "top", { expiresInMinutes: 60*5 });
- 		res.json({token: token});
- 		console.log(token);
+
+ 		// user.validPassword(req.body.pwd, User.salt);
+ 		// var token = jwt.sign(profile, "top", { expiresInMinutes: 60*5 });
+ 		// res.json({token: token});
+ 		// console.log(token);
 	})
 }
 	//var quizAsString = JSON.stringify(req.body); 

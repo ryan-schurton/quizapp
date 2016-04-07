@@ -5,12 +5,14 @@ var Schema = mongoose.Schema;
 // Create a schema.
 var userSchema = new Schema({
   user: {
-    type: String
+    type: String,
+    require: true,
+    index: {unique: true}
   },
   email: { type: String,
     trim: true,
-    unqiue: true,
-    require: true
+    require: true,
+    index: {unqiue: true}
   },
   date: { 
   	type: Date, 
@@ -26,13 +28,12 @@ userSchema.methods.setPassword = function(password){
 	this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
 };
 
-userSchema.methods.validPassword = function(password, salt) {
-  //console.log("is valid?..");
-  //console.log(password);
-  //console.log(salt);
-  var hash = crypto.pbkdf2Sync(password, salt, 1000, 64).toString('hex');
+userSchema.methods.validPassword = function(password, salt, hash) {
+
+  var curhash = crypto.pbkdf2Sync(password, salt, 1000, 64).toString('hex');
   console.log(hash);
-  // return this.hash === hash;
+  return curhash === hash;
+
 };
 
 // Create a model using schema.
