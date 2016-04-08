@@ -1,29 +1,10 @@
 routerApp.controller('quizCtrl', function($scope, simpleObj, QuizService, quizRoutes, $location) {
-
-    // if(!simpleObj.data){
-    //     $location.path("/home");
-    // } else {
-    // }
-
-    //var curquizObj = JSON.parse(simpleObj.data.name);
-    //console.log(curquizObj);
-        //Move out of the controller and into quiz.route.srv.js
-    	//$scope.question;
-        //this.curquizObj = 0;
-
        
 
         this.curquizObj = JSON.parse(simpleObj.data.name);
         this.atindex = 0;
         this.userAnswers = [];
         this.startNow = new Date();
-
-
-
-        
-       // this.correctAnswer = this.curquizObj.questions[0].correctAnswer;
-        //console.log(this.curquizObj.questions[0].correctAnswer);
-        //console.log("the correct answer is : " + this.correctAnswer);
 
         /********************** Start of add new question *****************************/
         this.displayCurrentQuestion = function(quesIndex) {
@@ -69,14 +50,12 @@ routerApp.controller('quizCtrl', function($scope, simpleObj, QuizService, quizRo
         
         this.addAnswer = function(answer) {
             console.log("My Answer is : " + answer);
-            //console.log("Correct Answer : " + );
-            //console.log('save');
             console.log("inside chageQes: " + this.crt_qest);
             console.log("Currently at question: " + this.atindex);
 
+
             this.userAnswers[this.atindex] = this.crt_qest; //assign Answer to index
-            //console.log(this.userAnswers);
-            //console.log($scope.atindex);
+
         }
 
 
@@ -85,7 +64,6 @@ routerApp.controller('quizCtrl', function($scope, simpleObj, QuizService, quizRo
 
         //Will change the question base on the direction clicked
         this.next = function(direction) {
-            console.log("abc");
             if(direction) {
                 this.atindex++;
             } else {
@@ -131,13 +109,6 @@ routerApp.controller('quizCtrl', function($scope, simpleObj, QuizService, quizRo
 
     }
 
-    this.timer = function() {
-        setInterval(function(){
-
-          "aaa";
-        
-        }, 1000);
-    }
 
 	this.markQuiz = function() {
 
@@ -162,34 +133,28 @@ routerApp.controller('quizCtrl', function($scope, simpleObj, QuizService, quizRo
 
 
         this.diffDate = hrs+":"+min+":"+leftSec;
-        //this.diffDate = setTimeout(this.timer,1000);
 
-
-        //this.timeDiff = Math.abs(this.passDate - this.nowDate);
-        //this.diffDate = Math.ceil(this.timeDiff / (1000 * 3600 * 24));
-        
-        //console.log(String(this.diffDate));
 
 		for(var i = 0; i < this.curquizObj.questions.length; i++) {
-            //console.log(this.curquizObj.questions[i].correctAnswer + " === " + this.userAnswers[i]);
-			if(this.curquizObj.questions[i].correctAnswer === this.userAnswers[i]) {
-				console.log("Correct");
+			if(this.curquizObj.questions[i].correctAnswer == this.userAnswers[i]) {
 				this.right++;
 			} else {
 				this.wrong++;
-				console.log("Wrong");
 			}
 		}
 
         this.percentage = ((this.right  / this.curquizObj.questions.length) * 100).toFixed(2);
 
+
 	}
 
     this.restart = function() {
         this.atindex = 0;
+        this.selectedIndex = 0;
         this.userAnswers = [];
         this.crt_qest = 0;
-        console.log(this.crt_qest);
+        this.displayCurrentQuestion(0);
+        this.startNow = new Date();
     }
 
 });

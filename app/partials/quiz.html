@@ -18,6 +18,12 @@
     font-weight: bold;
 
   }
+  .choice{
+    border: solid green;
+    border-radius: 6px;
+  }
+
+
 </style>
 
 <h2>{{ctrl.question}}</h2>
@@ -26,7 +32,7 @@
 
 <nav>
 	<ul class="pagination pagination-lg">
-	    <li class="page-item " ng-class="{ 'active': $index == selectedIndex }" ng-repeat="i in ctrl.arr" ng-click="ctrl.itemClicked($index)"><a ng-click="ctrl.changeQes(i, ctrl.arr, $event)" id="{{i+1}}" class="page-link" >{{i + 1}}</a></li>
+	    <li class="page-item" ng-class="{ 'active': ctrl.selectedIndex == i }" ng-repeat="i in ctrl.arr" ng-click="ctrl.itemClicked($index)"><a ng-click="ctrl.changeQes(i, ctrl.arr, $event)" id="{{i+1}}" class="page-link" ng-model="ctrl.selectedIndex">{{i + 1}}</a></li>
 	</ul>
 </nav>
 
@@ -40,11 +46,10 @@
         </div>
       </div>
   </div>
-
 <div class="col-lg-10 margin-top-15">
-    <div class="input-group input-group-lg margin-top-15" ng-repeat="i in ctrl.currentQuestion">
+    <div ng-class="{'choice': ctrl.crt_qest === i.value}" class="input-group input-group-lg margin-top-15" ng-repeat="i in ctrl.currentQuestion">
       <span class="input-group-addon">
-        <input type="radio" aria-label="..." name="answer" ng-model="ctrl.crt_qest" value="{{i.value}}" ng-click="ctrl.addAnswer($index)">
+        <input type="radio" aria-label="..." name="answer" ng-model="ctrl.crt_qest" ng-value="i.value" ng-click="ctrl.addAnswer($index)">
       </span>
 
       <input type="text" class="form-control" aria-label="..."  ng-model="i.answer" ng-click="ctrl.addAnswer($index)" readonly>
