@@ -11,11 +11,15 @@ routerApp.controller('quizCtrl', function($scope, simpleObj, QuizService, quizRo
     	//$scope.question;
         //this.curquizObj = 0;
 
+       
+
         this.curquizObj = JSON.parse(simpleObj.data.name);
         this.atindex = 0;
         this.userAnswers = [];
+        this.startNow = new Date();
 
-        // this.crt_qest = 2;
+
+
         
        // this.correctAnswer = this.curquizObj.questions[0].correctAnswer;
         //console.log(this.curquizObj.questions[0].correctAnswer);
@@ -24,6 +28,8 @@ routerApp.controller('quizCtrl', function($scope, simpleObj, QuizService, quizRo
         /********************** Start of add new question *****************************/
         this.displayCurrentQuestion = function(quesIndex) {
             this.crt_qest = this.userAnswers[quesIndex];
+
+            console.log(this.crt_qest);
             //This is the quiz object returned from the resolve
             //it contains basicInfo , prerequisites, and questions
         	//this.curquizObj = JSON.parse(simpleObj.data.name);
@@ -67,10 +73,13 @@ routerApp.controller('quizCtrl', function($scope, simpleObj, QuizService, quizRo
             //console.log('save');
             console.log("inside chageQes: " + this.crt_qest);
             console.log("Currently at question: " + this.atindex);
+
             this.userAnswers[this.atindex] = this.crt_qest; //assign Answer to index
             //console.log(this.userAnswers);
             //console.log($scope.atindex);
         }
+
+
 
         //console.log(this.endAt);
 
@@ -99,8 +108,6 @@ routerApp.controller('quizCtrl', function($scope, simpleObj, QuizService, quizRo
     		index = this.curquizObj.questions.length - 1;
     	} 
 
-        //call function to change question
-        //this.displayCurrentQuestion(index);
 
     	this.cols = this.curquizObj.questions.length;
 		this.arr = [];
@@ -123,15 +130,14 @@ routerApp.controller('quizCtrl', function($scope, simpleObj, QuizService, quizRo
 
 
     }
-    //TODO check what question the user is one ex: 0, 1, 2 ,3 
 
-    //TODO Check in userAnswer array if user has answered this question before
+    this.timer = function() {
+        setInterval(function(){
 
-    //TODO if there is an answer at this INDEX select the matching radio button value
-
-    //TODO if not insure no radio buttons are selected
-
-/**/
+          "aaa";
+        
+        }, 1000);
+    }
 
 	this.markQuiz = function() {
 
@@ -139,6 +145,30 @@ routerApp.controller('quizCtrl', function($scope, simpleObj, QuizService, quizRo
 		this.wrong=0;
         this.percentage = 0;
 
+        this.passDate = this.startNow;
+        this.nowDate = new Date();
+
+        var diff = (this.passDate - this.nowDate)/1000;
+        var diff = Math.abs(Math.floor(diff));
+        
+        var days = Math.floor(diff/(24*60*60));
+        var leftSec = diff - days * 24*60*60;
+        
+        var hrs = Math.floor(leftSec/(60*60));
+        var leftSec = leftSec - hrs * 60*60;
+          
+        var min = Math.floor(leftSec/(60));
+        var leftSec = leftSec - min * 60;
+
+
+        this.diffDate = hrs+":"+min+":"+leftSec;
+        //this.diffDate = setTimeout(this.timer,1000);
+
+
+        //this.timeDiff = Math.abs(this.passDate - this.nowDate);
+        //this.diffDate = Math.ceil(this.timeDiff / (1000 * 3600 * 24));
+        
+        //console.log(String(this.diffDate));
 
 		for(var i = 0; i < this.curquizObj.questions.length; i++) {
             //console.log(this.curquizObj.questions[i].correctAnswer + " === " + this.userAnswers[i]);
@@ -154,5 +184,12 @@ routerApp.controller('quizCtrl', function($scope, simpleObj, QuizService, quizRo
         this.percentage = ((this.right  / this.curquizObj.questions.length) * 100).toFixed(2);
 
 	}
+
+    this.restart = function() {
+        this.atindex = 0;
+        this.userAnswers = [];
+        this.crt_qest = 0;
+        console.log(this.crt_qest);
+    }
 
 });
